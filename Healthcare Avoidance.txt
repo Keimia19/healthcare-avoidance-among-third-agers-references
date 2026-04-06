@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>References</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #7faee6;
+    --light: #cfe3ff;
+    --accent: #5c8fd6;
+    --bg: #f4f8ff;
+    --card: #ffffff;
+    --text: #2a3f5f;
+    --muted: #6c85a3;
+    --line: #d6e4f5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(168,213,162,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 80%, rgba(122,173,122,0.13) 0%, transparent 50%);
+  }
+
+  .page-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+  }
+
+  /* ── Header ── */
+  header {
+    text-align: center;
+    margin-bottom: 52px;
+    position: relative;
+  }
+
+  .header-leaf {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: sway 4s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%,100% { transform: rotate(-4deg); }
+    50%      { transform: rotate(4deg); }
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--forest);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  header .subtitle {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .header-rule {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--sage), transparent);
+    margin: 18px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── Search bar ── */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border: 1.5px solid var(--line);
+    border-radius: 50px;
+    background: var(--white);
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    box-shadow: 0 2px 8px rgba(74,140,92,0.07);
+  }
+  .search-wrap input:focus {
+    border-color: var(--sage);
+    box-shadow: 0 2px 16px rgba(74,140,92,0.13);
+  }
+  .search-wrap input::placeholder { color: var(--muted); opacity: 0.7; }
+  .search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sage);
+    font-size: 1.1rem;
+    pointer-events: none;
+  }
+  #ref-count {
+    text-align: right;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* ── Reference list ── */
+  .ref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ref-item {
+    display: flex;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    animation: fadeUp 0.4s ease both;
+  }
+  .ref-item:last-child { border-bottom: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .ref-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--mint), var(--sage));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-top: 2px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  .ref-body {
+    flex: 1;
+    font-size: 0.925rem;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .ref-body a {
+    color: var(--forest);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sage);
+    transition: color 0.2s, border-color 0.2s;
+    word-break: break-all;
+  }
+  .ref-body a:hover {
+    color: var(--sage);
+    border-color: transparent;
+  }
+
+  /* ── QR section ── */
+  .qr-section {
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  .qr-card {
+    display: inline-block;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: 0 6px 30px rgba(74,140,92,0.10);
+  }
+
+  .qr-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+  .qr-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  #qrcode canvas, #qrcode img {
+    border-radius: 10px;
+    border: 4px solid var(--pale);
+  }
+
+  .qr-url {
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    word-break: break-all;
+    max-width: 260px;
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  /* ── Hidden items ── */
+  .ref-item.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <header>
+    <span class="header-leaf">🌿</span>
+    <h1>References</h1>
+    <p class="subtitle">Research Bibliography &amp; Citations</p>
+    <div class="header-rule"></div>
+  </header>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Search references by author, title, or year…" oninput="filterRefs()">
+  </div>
+  <p id="ref-count"></p>
+
+  <div class="ref-list" id="ref-list"></div>
+
+  <div class="qr-section">
+    <div class="qr-card">
+      <h3>Scan to Access</h3>
+      <p>Share this reference page instantly</p>
+      <div id="qrcode"></div>
+      <div class="qr-url" id="qr-url-text"></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 · All references listed in APA format
+  </footer>
+
+</div>
+
+<!-- QRCode.js from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+const refs = [
+  "Becker, M. H., & Rosenstock, I. M. (1974). The health belief model and personal health behavior. In H. A. M. Steptoe (Ed.), Health behavior and health education: Theory, research, and practice (pp. 91–110). Jossey-Bass.",
+
+"Bhutia, K. D., Latha, T., & Devi, E. S. (2019). Beliefs, Preferences and Practices of End of Life Care among Elderly. Medico-Legal Update, 19(2), 53. <a href='https://doi.org/10.5958/0974-1283.2019.00143.9' target='_blank'>https://doi.org/10.5958/0974-1283.2019.00143.9</a>",
+
+"Bibon, M. B. (2021). Acquisition of Folk Healing Practices: A Phenomenological Study. <a href='https://www.semanticscholar.org/paper/ACQUISITION-OF-FOLK-HEALING-PRACTICES%3A-A-STUDY-THE-Bibon/a2747d5543d12d14174e4bdd5ed1135527c20eff' target='_blank'>View Source</a>",
+
+"Burch, A. E. (2022). Factors responsible for healthcare avoidance among rural adults. Journal of Community Health, 47(5), 737–744. <a href='https://doi.org/10.1007/s10900-022-01106-3' target='_blank'>https://doi.org/10.1007/s10900-022-01106-3</a>",
+
+"Cablao, J. Y., et al. (2019). Awareness on R.A. 9994 in Nueva Ecija. Journal of Public Administration and Governance, 9(2), 248. <a href='https://doi.org/10.5296/jpag.v9i2.14767' target='_blank'>https://doi.org/10.5296/jpag.v9i2.14767</a>",
+
+"Carandang, R. R., et al. (2019). Unmet Needs among Senior Citizens in the Philippines. IJERPH, 16(19), 3745. <a href='https://doi.org/10.3390/ijerph16193745' target='_blank'>https://doi.org/10.3390/ijerph16193745</a>",
+
+"Carandang, R. R., Cruz, J. P., & Cruz, C. P. (2019). Challenges in accessing healthcare among older adults in rural Philippines.",
+
+"Cardoso, R. S. S., et al. (2023). Multidimensionality of low health literacy. Clinical Nursing Research, 32(2), 270–277. <a href='https://doi.org/10.1177/10547738221146461' target='_blank'>https://doi.org/10.1177/10547738221146461</a>",
+
+"Commission on Population and Development. (2023). Population projections for the Philippines. <a href='https://popcom.gov.ph' target='_blank'>https://popcom.gov.ph</a>",
+
+"Cooper‐Moss, N., et al. (2024). Barriers to healthcare for people with learning disability. <a href='https://www.semanticscholar.org/paper/Barriers-to-Healthcare-for-People-With-a-Learning-Cooper%E2%80%90Moss-Umpleby/57cef3ee1b5f60c59e356ccb1aa1f963f3d9af24' target='_blank'>View Source</a>",
+
+"Creswell, J. W., & Poth, C. N. (2018). Qualitative inquiry and research design (4th ed.). SAGE.",
+
+"Etikan, I., et al. (2016). Comparison of sampling techniques. AJTAS, 5(1), 1–4. <a href='https://doi.org/10.11648/j.ajtas.20160501.11' target='_blank'>https://doi.org/10.11648/j.ajtas.20160501.11</a>",
+
+"Gann, L., et al. (2024). Treatment patterns in older adults with depression. <a href='https://www.semanticscholar.org/' target='_blank'>View Source</a>",
+
+"Grad, R., et al. (2019). Appropriate screening in older patients. <a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC6693611/' target='_blank'>View Article</a>",
+
+"Hajek, A., et al. (2023). Community centers and psychosocial factors. IJGP. <a href='https://doi.org/10.1002/gps.5901' target='_blank'>https://doi.org/10.1002/gps.5901</a>",
+
+"Hausman, H. K., et al. (2022). COVID-19 impact on older adults. Frontiers in Aging Neuroscience. <a href='https://doi.org/10.3389/fnagi.2022.999107' target='_blank'>https://doi.org/10.3389/fnagi.2022.999107</a>",
+
+"Henderson, S., et al. (2018). Cultural competence in healthcare. <a href='https://www.semanticscholar.org/' target='_blank'>View Source</a>",
+
+"Isaiah. (2023). Retirement preparedness report. <a href='https://tcf.org/content/report/as-the-population-ages-more-workers-are-unprepared-for-retirement-can-states-help-close-that-gap' target='_blank'>View Report</a>",
+
+"World Health Organization. (2024). World report on aging and health. <a href='https://www.who.int' target='_blank'>https://www.who.int</a>"
+];
+
+function renderRefs(list) {
+  const container = document.getElementById('ref-list');
+  container.innerHTML = '';
+  list.forEach((r, i) => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    item.style.animationDelay = (i * 0.025) + 's';
+    item.innerHTML = `
+      <div class="ref-num">${i + 1}</div>
+      <div class="ref-body">${r}</div>
+    `;
+    container.appendChild(item);
+  });
+  document.getElementById('ref-count').textContent =
+    list.length + ' reference' + (list.length !== 1 ? 's' : '');
+}
+
+function filterRefs() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const filtered = refs.filter(r => r.replace(/<[^>]+>/g,'').toLowerCase().includes(q));
+  renderRefs(filtered);
+}
+
+renderRefs(refs);
+
+// QR Code
+const pageURL = window.location.href;
+document.getElementById('qr-url-text').textContent = pageURL;
+new QRCode(document.getElementById("qrcode"), {
+  text: pageURL,
+  width: 200,
+  height: 200,
+  colorDark: "#4a8c5c",
+  colorLight: "#f5fbf4",
+  correctLevel: QRCode.CorrectLevel.H
+});
+</script>
+</body>
+</html>
